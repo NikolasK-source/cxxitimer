@@ -6,6 +6,8 @@
 #include "cxxitimer.hpp"
 
 #include <cmath>
+#include <iostream>
+#include <sysexits.h>
 
 
 namespace cxxitimer {
@@ -56,7 +58,14 @@ ITimer::ITimer(int type, double interval, double value) noexcept
 
 ITimer::~ITimer() {
     // stop timer if running
-    if (running) stop();
+    if (running) {
+        try {
+            stop();
+        } catch (const std::exception &e) {
+            std::cerr << "Exception in destructor (" << __PRETTY_FUNCTION__ << "): " << e.what() << std::endl;
+            exit(EX_SOFTWARE);
+        }
+    }
 }
 
 void ITimer::adjust_speed(double new_factor) {

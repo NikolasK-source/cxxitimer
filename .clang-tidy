@@ -55,7 +55,8 @@ Checks:          'bugprone-*,
                   -cppcoreguidelines-avoid-non-const-global-variables,
                   -cppcoreguidelines-avoid-magic-numbers,
                   -bugprone-easily-swappable-parameters,
-                  -cppcoreguidelines-pro-type-reinterpret-cast'
+                  -cppcoreguidelines-pro-type-reinterpret-cast,
+                  -cppcoreguidelines-pro-bounds-array-to-pointer-decay'
 WarningsAsErrors: '*,
                   -modernize-*,
                   -readability-*
