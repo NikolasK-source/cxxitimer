@@ -15,7 +15,7 @@ static int  x = 0;
 static void handler(int) { ++x; }
 
 int main() {
-    struct sigaction sa;
+    struct sigaction sa {};
     memset(&sa, 0, sizeof(sa));
     sa.sa_handler = handler;
     int tmp       = sigaction(SIGALRM, &sa, nullptr);

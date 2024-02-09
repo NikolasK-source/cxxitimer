@@ -10,8 +10,27 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(Target cxxitimer)
 
-add_library(${Target}
-        src/libinfo.cpp)
+option(CLANG_TIDY "use clang-tidy" ON)
+option(CLANG_TIDY_NO_ERRORS "do not treat clang-tidy warnings as errors" ON)
+
+if(CLANG_TIDY)
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        if (${CLANG_TIDY_NO_ERRORS}) 
+            set (CLANG_TIDY_CONFIG_FILE ${CMAKE_SOURCE_DIR}/.clang-tidy-noerrors)
+        else()
+            set (CLANG_TIDY_CONFIG_FILE ${CMAKE_SOURCE_DIR}/.clang-tidy)
+        endif()
+
+        set(CMAKE_CXX_CLANG_TIDY
+                clang-tidy
+                -config-file=${CLANG_TIDY_CONFIG_FILE})
+        message(STATUS "clang-tidy enabled: ${CLANG_TIDY_CONFIG_FILE}")
+    else()
+        message(WARNING "clang-tidy requested, but only available if clang is selected as compiler")
+    endif()
+endif()
+
+add_library(${Target})
 install(TARGETS ${Target})
 
 add_subdirectory("src")
