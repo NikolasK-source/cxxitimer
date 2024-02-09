@@ -41,7 +41,7 @@ private:
 
 protected:
     //* internal use only!
-    ITimer(int type, const timeval &interval) noexcept;
+    explicit ITimer(int type, const timeval &interval = {1, 0}) noexcept;
 
     //* internal use only!
     ITimer(int type, const timeval &interval, const timeval &value) noexcept;
@@ -99,6 +99,44 @@ public:
     void set_speed_factor(double factor);
 
     /**
+     * @brief set interval (timeval)
+     * @details
+     *      only allowed if the timer is stopped!
+     *      set the timer value to the same time
+     * @param interval timer interval
+     * @exception std::logic_error timer is started
+     */
+    inline void set_interval(const timeval &interval) { set_interval_value(interval, interval); }
+
+    /**
+     * @brief set interval (double)
+     * @details
+     *      only allowed if the timer is stopped!
+     *      set the timer value to the same time
+     * @param interval timer interval (seconds)
+     * @exception std::logic_error timer is started
+     */
+    inline void set_interval(double &interval) { set_interval_value(interval, interval); }
+
+    /**
+     * @brief set interval and value
+     * @details only allowed if the timer is stopped
+     * @param interval timer interval
+     * @param value timer value
+     * @exception std::logic_error timer is started
+     */
+    void set_interval_value(const timeval &interval, const timeval &value);
+
+    /**
+     * @brief set interval and value
+     * @details only allowed if the timer is stopped
+     * @param interval timer interval (seconds)
+     * @param value timer value (seconds)
+     * @exception std::logic_error timer is started
+     */
+    void set_interval_value(double interval, double value);
+
+    /**
      * @brief set speed to normal
      * @details like calling set_speed_factor with 1.0
      * @exception std::system_error call of setitimer failed
@@ -154,7 +192,7 @@ public:
      * @param interval timer interval
      * @exception std::logic_error instance exists
      */
-    explicit ITimer_Real(const timeval &interval);
+    explicit ITimer_Real(const timeval &interval = {1, 0});
 
     /**
      * @brief create ITimer_Real instance
@@ -213,7 +251,7 @@ public:
      * @param interval timer interval
      * @exception std::logic_error instance exists
      */
-    explicit ITimer_Virtual(const timeval &interval);
+    explicit ITimer_Virtual(const timeval &interval = {1, 0});
 
     /**
      * @brief create ITimer_Virtual instance
@@ -275,7 +313,7 @@ public:
      * @param interval timer interval
      * @exception std::logic_error instance exists
      */
-    explicit ITimer_Prof(const timeval &interval);
+    explicit ITimer_Prof(const timeval &interval = {1, 0});
 
     /**
      * @brief create ITimer_Prof instance

@@ -88,6 +88,10 @@ void ITimer::start() {
     timer_val.it_interval = timer_interval / speed_factor;
     timer_val.it_value    = timer_value / speed_factor;
 
+    if (timer_val.it_interval.tv_sec < 0) throw std::runtime_error("timer interval is negative");
+
+    if (timer_val.it_value.tv_sec < 0) throw std::runtime_error("timer value is negative");
+
     if (timer_val.it_interval.tv_sec == 0 && timer_val.it_interval.tv_usec == 0)
         throw std::runtime_error("invalid timer values due to to a to small speed factor");
 
@@ -121,6 +125,17 @@ void ITimer::set_speed_factor(double factor) {
     if (running) adjust_speed(factor);
     else
         speed_factor = factor;
+}
+
+void ITimer::set_interval_value(const timeval &interval, const timeval &value) {
+    if (running) throw std::logic_error("cannot set interval/value if timer is running");
+
+    this->timer_interval = interval;
+    this->timer_value    = value;
+}
+
+void ITimer::set_interval_value(double interval, double value) {
+    set_interval_value(double_to_timeval(interval), double_to_timeval(value));
 }
 
 void ITimer::set_speed_to_normal() {
