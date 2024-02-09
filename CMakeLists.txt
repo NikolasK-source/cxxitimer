@@ -10,7 +10,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(Target cxxitimer)
 
-add_library(${Target})
+add_library(${Target}
+        src/libinfo.cpp)
 install(TARGETS ${Target})
 
 add_subdirectory("src")

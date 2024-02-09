@@ -4,3 +4,4 @@
 #
 
 target_sources(${Target} PRIVATE cxxitimer.cpp)
+target_sources(${Target} PRIVATE libinfo.cpp)

@@ -384,5 +384,23 @@ double timeval_to_double(const timeval &time) noexcept;
 //* convert double (seconds) to timeval
 timeval double_to_timeval(double time) noexcept;
 
+/**
+ * @brief get library version
+ * @return library version as string
+ */
+[[maybe_unused, nodiscard]] std::string get_lib_version();
+
+/**
+ * @brief get full library info
+ * @details contains name, version, compiler and system
+ * @return library info as string
+ */
+[[maybe_unused, nodiscard]] std::string get_lib_info();
+
+/**
+ * @brief get library compilation date
+ * @return compilation date as string
+ */
+[[maybe_unused, nodiscard]] std::string get_lib_date();
 
 }  // namespace cxxitimer
