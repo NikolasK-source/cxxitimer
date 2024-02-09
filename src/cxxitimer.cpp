@@ -84,9 +84,7 @@ void ITimer::start() {
     if (running) throw std::logic_error("timer already started");
 
     // create scaled timer value
-    itimerval timer_val;
-    timer_val.it_interval = timer_interval / speed_factor;
-    timer_val.it_value    = timer_value / speed_factor;
+    itimerval timer_val {timer_interval / speed_factor, timer_value / speed_factor};
 
     if (timer_val.it_interval.tv_sec < 0) throw std::runtime_error("timer interval is negative");
 
@@ -164,7 +162,7 @@ void ITimer::to_fstream(std::ofstream &fstream) const {
 void ITimer::from_fstream(std::ifstream &fstream) {
     if (running) throw std::logic_error("timer is running");
 
-    itimerval val;
+    itimerval val {};
     fstream.read(reinterpret_cast<char *>(&val), sizeof(val));
     timer_interval = val.it_interval;
     timer_value    = val.it_value;
@@ -322,9 +320,7 @@ double timeval_to_double(const timeval &time) noexcept {
 }
 
 timeval double_to_timeval(const double time) noexcept {
-    timeval ret_val;
-    ret_val.tv_sec  = static_cast<time_t>(time);
-    ret_val.tv_usec = static_cast<suseconds_t>(fmod(time, 1.0) * USEC_PER_SEC);
+    timeval ret_val {static_cast<time_t>(time), static_cast<suseconds_t>(fmod(time, 1.0) * USEC_PER_SEC)};
     return ret_val;
 }
 

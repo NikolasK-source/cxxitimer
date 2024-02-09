@@ -5,7 +5,6 @@
 
 #include "cxxitimer.hpp"
 
-#include <cassert>
 #include <csignal>
 #include <cstring>
 #include <iostream>
