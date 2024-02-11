@@ -116,7 +116,7 @@ public:
      * @param interval timer interval (seconds)
      * @exception std::logic_error timer is started
      */
-    inline void set_interval(double &interval) { set_interval_value(interval, interval); }
+    inline void set_interval(double interval) { set_interval_value(interval, interval); }
 
     /**
      * @brief set interval and value
