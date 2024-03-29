@@ -1,2 +1,7 @@
-docs_doxy
-cmake-build-*
+cmake-build
+docs
+build
+cmake-build*
+src/generated/*.cpp
+src/generated/*.hpp
+include/cxxitimer_version_info.hpp

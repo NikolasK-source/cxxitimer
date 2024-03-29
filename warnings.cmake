@@ -5,7 +5,7 @@
 
 # warnings that are valid for gcc and clang
 function(commonwarn target)
-    target_compile_options(${target} PUBLIC -Wall -Wextra -Werror -pedantic -pedantic-errors)
+    target_compile_options(${target} PUBLIC -Wall -Wextra -pedantic -pedantic-errors)
 
     # see https://gcc.gnu.org/onlinedocs/gcc-4.3.2/gcc/Warning-Options.html for more details
 
@@ -72,6 +72,8 @@ function(enable_warnings target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         commonwarn(${target})
         clangwarn(${target})
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        target_compile_options(${target} PUBLIC /Wall /WX)
     endif()
 endfunction()
 
