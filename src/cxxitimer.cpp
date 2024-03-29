@@ -62,7 +62,7 @@ ITimer::~ITimer() {
         try {
             stop();
         } catch (const std::exception &e) {
-            std::cerr << "Exception in destructor (" << __PRETTY_FUNCTION__ << "): " << e.what() << std::endl;
+            std::cerr << "Exception in destructor (" << __PRETTY_FUNCTION__ << "): " << e.what() << '\n';
             exit(EX_SOFTWARE);
         }
     }

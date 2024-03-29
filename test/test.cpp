@@ -12,7 +12,9 @@
 #include <thread>
 
 static int  x = 0;
-static void handler(int) { ++x; }
+static void handler(int) {
+    ++x;
+}
 
 int main() {
     struct sigaction sa {};
@@ -37,7 +39,7 @@ int main() {
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
     if (x != 5) {
-        std::cerr << "Assertion x == 5 failed " << __FILE__ << ":" << __LINE__ << std::endl;
+        std::cerr << "Assertion x == 5 failed " << __FILE__ << ":" << __LINE__ << '\n';
         return EXIT_FAILURE;
     }
 }
