@@ -7,7 +7,6 @@
 # ======================================================================================================================
 
 target_sources(${Target} PRIVATE cxxitimer.cpp)
-target_sources(${Target} PRIVATE libinfo.cpp)
 
 # ---------------------------------------- header files (*.hpp, *.h, ...) ----------------------------------------------
 # -------------------- place only header files in the src folder that are required only internally. --------------------
