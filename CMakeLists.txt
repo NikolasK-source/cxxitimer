@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.22.0 FATAL_ERROR)
 # ======================================================================================================================
 
 # project
-project(cxxitimer LANGUAGES CXX VERSION 1.0.1)
+project(cxxitimer LANGUAGES CXX VERSION 2.0.0)
 
 set(Target cxxitimer)             # library name
 set(STANDARD 20)                  # C++ Standard
